@@ -1,0 +1,30 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block page_content %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+{% for post in posts %}
+
+<div class="col">
+
+<div class="card" style="width: 18rem;">
+    <img src="{{ post.image.url }}"  class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ post.description }}</h5>
+        <a href="{% url 'core:profile-detail' post.author.profile.id %}" class="card-text">Автор: {{ post.author }}</a>
+        <p class="card-text">Опубликовано: {{ post.date_pub }}</p>
+        <a href="{% url 'posts:post-detail' post.id %}" class="btn btn-primary">Перейти к посту</a>
+        <form method="post" action="{% url 'posts:post-like' post.id %}">
+            {% csrf_token %}
+            <button type="submit">👍</button>
+        </form>
+    </div>
+</div>
+</div>
+
+{% endfor %}
+</div>
+{% endblock %}

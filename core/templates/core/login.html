@@ -1,0 +1,21 @@
+{% extends 'posts/base.html' %}
+{% block title %}
+Авторизация
+{% endblock %}
+
+{% block page_content %}
+<main class="form-signin">
+    <form method="post">
+        <h1 class="h3 mb-3 fw-normal">Войти</h1>
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-floating">
+            {{ field }}
+            </div>
+        {% endfor %}
+        <a href="{% url 'core:password-reset' %}">Забыли пароль?</a>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+        <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
+    </form>
+</main>
+{% endblock %}
